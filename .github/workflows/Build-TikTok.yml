@@ -1,0 +1,30 @@
+name: Build-TikTok
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ TikTok ]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: ⏳ Checkout
+      - uses: actions/checkout@v2
+
+      - name: Run a one-line script
+        run: echo Hello, world!
+
+      - name: 🌎 Release (using local code)
+        uses: ./
+        id: release-action
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag-name: "TikTok"
+          release-name: "TikTok"
+          asset-name: "TikTok 21.1.0.ipa"
+          file: "ipa/TikTok 21.1.0.ipa"
